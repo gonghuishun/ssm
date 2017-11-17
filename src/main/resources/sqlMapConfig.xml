@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--读取配置文件-->
+    <!--
+        如果属性在不只一个地方进行了配置，那么 MyBatis 将按照下面的顺序来加载：
+            在 properties 元素体内指定的属性首先被读取。
+            然后根据 properties 元素中的 resource 属性读取类路径下属性文件或根据 url 属性指定的路径读取属性文件，并覆盖已读取的同名属性。
+            最后读取作为方法参数传递的属性，并覆盖已读取的同名属性。
+        因此，通过方法参数传递的属性具有最高优先级，resource/url 属性中指定的配置文件次之，最低优先级的是 properties 属性中指定的属性。
+    -->
+    <properties resource="db.properties">
+        <property name="jdbc.username" value="root"/>
+        <property name="jdbc.password" value="456789"/>
+    </properties>
+
+    <!--制定相关配置-->
+    <settings>
+        <!--是否开启自动驼峰命名规则（camel case）映射，即从经典数据库列名 A_COLUMN 到经典 Java 属性名 aColumn 的类似映射-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- 	指定 MyBatis 所用日志的具体实现，未指定时将自动查找。-->
+        <setting name="logImpl" value="LOG4J"/>
+        <setting name="lazyLoadingEnabled" value="true"></setting>
+        <setting name="aggressiveLazyLoading" value="false"></setting>
+    </settings>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mapper/Test.xml"/>
+        <mapper resource="mapper/User.xml"/>
+        <mapper resource="mapper/OrderMapper.xml"/>
+        <mapper resource="mapper/OrderDetailMapper.xml"/>
+    </mappers>
+</configuration>
