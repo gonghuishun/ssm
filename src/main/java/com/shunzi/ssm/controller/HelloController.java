@@ -16,7 +16,7 @@ public class HelloController {
     public ModelAndView hello(){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("index");
-        mv.addObject("hello","Hello world!");
+        mv.addObject("hello","Hello world!!");
         return mv;
     }
     @RequestMapping(value="/json")
